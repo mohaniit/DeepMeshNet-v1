@@ -1,0 +1,23 @@
+[project]
+name = "deepmeshnet-v1"
+version = "1.0.0"
+description = "Explainable engineering AI framework for CAD mesh-density prediction"
+authors = [
+    { name = "Dr. Mohan R" }
+]
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.black]
+line-length = 88
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true

@@ -1,37 +1,16 @@
-# Python
+.venv/
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-
-# Virtual environment
-.venv/
-
-# VS Code
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
 .vscode/
 
-# Pytest
-.pytest_cache/
+outputs/
+*.log
+*.tmp
 
-# Mypy
-.mypy_cache/
-
-# Ruff
-.ruff_cache/
-
-# Build
 build/
 dist/
 *.egg-info/
-
-# Jupyter
-.ipynb_checkpoints/
-
-# Output
-outputs/
-
-# Logs
-*.log
-
-# Temporary
-*.tmp
