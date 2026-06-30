@@ -11,20 +11,6 @@ BoundingBox3D = tuple[Vector3D, Vector3D]
 
 
 @dataclass
-class CADModel:
-    """Standard CAD model object passed through DeepMeshNet-v1."""
-
-    model_id: str
-    file_name: str
-
-    dataset_name: str | None = None
-    dataset_split: str | None = None
-
-    backend: str | None = None
-    source_path: str | None = None
-    _occ_shape: Any | None = None
-
-@dataclass
 class VertexData:
     """CAD vertex data."""
 
@@ -41,11 +27,12 @@ class EdgeData:
     length: float = 0.0
     vertex_ids: list[int] = field(default_factory=list)
     adjacent_face_ids: list[int] = field(default_factory=list)
+    metadata: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
 class FaceData:
-    """CAD face data used across geometry, knowledge, graph, and visualization modules."""
+    """CAD face data used across DeepMeshNet-v1 modules."""
 
     face_id: int
     surface_type: str = "UNKNOWN"
@@ -77,6 +64,13 @@ class CADModel:
     model_id: str
     file_name: str
 
+    dataset_name: str | None = None
+    dataset_split: str | None = None
+
+    backend: str | None = None
+    source_path: str | None = None
+    _occ_shape: Any | None = None
+
     faces: list[FaceData] = field(default_factory=list)
     edges: list[EdgeData] = field(default_factory=list)
     vertices: list[VertexData] = field(default_factory=list)
@@ -103,4 +97,5 @@ class CADModel:
         for face in self.faces:
             if face.face_id == face_id:
                 return face
+
         raise KeyError(f"Face ID not found: {face_id}")
