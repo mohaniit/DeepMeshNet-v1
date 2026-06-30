@@ -1,12 +1,14 @@
-"""CAD loading utilities for DeepMeshNet-v1."""
+"""STEP CAD loader for DeepMeshNet-v1."""
 
 from __future__ import annotations
 
 from pathlib import Path
 
-from OCP.IFSelect import IFSelect_RetDone
-from OCP.STEPControl import STEPControl_Reader
-
+from src.geometry.backend import (
+    IFSelect_RetDone,
+    STEPControl_Reader,
+    require_cad_backend,
+)
 from src.geometry.cad_model import CADModel
 
 
@@ -19,7 +21,7 @@ def load_step_file(
     dataset_name: str | None = None,
     dataset_split: str | None = None,
 ) -> CADModel:
-    """Load a STEP/STP file and return a CADModel with the raw OCC shape attached."""
+    """Load STEP/STP file and return a CADModel with raw CAD shape attached."""
     path = Path(step_path)
 
     if not path.exists():
@@ -27,6 +29,8 @@ def load_step_file(
 
     if path.suffix.lower() not in SUPPORTED_STEP_EXTENSIONS:
         raise ValueError(f"Unsupported CAD file extension: {path.suffix}")
+
+    require_cad_backend()
 
     reader = STEPControl_Reader()
     status = reader.ReadFile(str(path))
